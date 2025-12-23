@@ -3,7 +3,7 @@ from sklearn.preprocessing import LabelEncoder
 import os
 
 def preprocess_data():
-    input_path = "../loan_approval_dataset.csv"
+    input_path = "../loan_approval_dataset_raw.csv"
     output_path = "loan_approval_preprocessed.csv"
 
     df = pd.read_csv(input_path)
@@ -31,3 +31,4 @@ def preprocess_data():
 
 if __name__ == "__main__":
     preprocess_data()
+
