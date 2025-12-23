@@ -1,0 +1,36 @@
+name: Automated Preprocessing
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  preprocess:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        pip install pandas scikit-learn
+
+    - name: Run preprocessing
+      run: |
+        cd preprocessing
+        python automate_Muhammad-Fizry-Alifta.py
+
+    - name: Commit result
+      run: |
+        git config --global user.name "fizry-al"
+        git config --global user.email "fizry-al@users.noreply.github.com"
+        git add preprocessing/loan_approval_preprocessing.csv
+        git commit -m "Auto update preprocessing dataset" || echo "No changes"
+        git push
